@@ -7,7 +7,7 @@ public partial class World : Node2D
 	private Camera2D _camera;
 	public override void _Ready()
 	{
-		_player = GetNode<Character>("Player");
+		_player = GetNode<Character>("ActorsContainer/Player");
 		_camera = GetNode<Camera2D>("Camera");
 	}
 

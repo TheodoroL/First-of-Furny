@@ -3,5 +3,6 @@ namespace FIrstofFurny.scripts;
 public enum EnumState
 {
     IDLE,
-    WALK
+    WALK,
+    ATTACK
 }

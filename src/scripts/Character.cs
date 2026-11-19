@@ -12,7 +12,7 @@ public partial class Character : CharacterBody2D
   public float Speed { get; set; }
   
   //Criando a máquina de estado 
-  public EnumState  State { get; set; } =  EnumState.IDLE;
+  private EnumState  _state =   EnumState.IDLE;
   
   private AnimationPlayer _animationPlayer;
   private Sprite2D _characterSprite;
@@ -35,23 +35,30 @@ public partial class Character : CharacterBody2D
   //Aqui verifica a movimentação do Character para mudar de Estado
   public void HandleMoviment()
   {
-    if (Velocity.Length() <= 0)
-      State = EnumState.IDLE;
-    else
-      State = EnumState.WALK;
+    if(_canMove())
+      if (Velocity.Length() <= 0)
+        _state = EnumState.IDLE;
+      else
+        _state = EnumState.WALK;
+    else 
+      Velocity = Vector2.Zero;
   }
 // método que verifica os inputs do jogador 
   public void HandleInput()
   {
     var direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down")
       .Normalized();
+    
+    if(Input.IsActionJustPressed("attack") &&  _canAttack())
+      _state = EnumState.ATTACK;
+      
     Velocity = direction * Speed;
     
   }
   //Verifica o Estado para aplicar a animação que estado que é 
   public void HandleAnimations()
   {
-    switch (State)
+    switch (_state)
     {
       case  EnumState.IDLE:
         _animationPlayer.Play("idle");
@@ -59,6 +66,10 @@ public partial class Character : CharacterBody2D
       
       case   EnumState.WALK:
         _animationPlayer.Play("walk");
+        break;
+      
+      case EnumState.ATTACK:
+        _animationPlayer.Play("punch");
         break;
     }     
   }
@@ -72,4 +83,13 @@ public partial class Character : CharacterBody2D
     else if(Velocity.X < 0)
       _characterSprite.FlipH = true;
   }
+
+  private bool _canMove() => _state == EnumState.WALK || _state == EnumState.IDLE;
+  
+  private bool _canAttack() => _state == EnumState.IDLE ||  _state == EnumState.WALK;
+
+
+  //função que faz que o jogador após terminar o soco ele volte no modo IDLE
+  public void OnCompletedAction() => _state = EnumState.IDLE;
+  
 }
