@@ -21,6 +21,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../DamageEmitter:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_wryrm"]
 resource_name = "idle"
@@ -69,6 +81,18 @@ tracks/1/keys = {
 "method": &"OnCompletedAction"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../DamageEmitter:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
 
 [sub_resource type="Animation" id="Animation_wme8x"]
 resource_name = "walk"
@@ -95,6 +119,9 @@ _data = {
 &"walk": SubResource("Animation_wme8x")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5pi7f"]
+size = Vector2(10, 6)
+
 [node name="Player" unique_id=2090944644 instance=ExtResource("1_ai21x")]
 collision_layer = 2
 collision_mask = 9
@@ -116,3 +143,16 @@ shape = SubResource("CapsuleShape2D_wryrm")
 [node name="AnimationPlayer" parent="." index="3" unique_id=1983981673]
 libraries/ = SubResource("AnimationLibrary_y7cno")
 autoplay = &"idle"
+
+[node name="DamageEmitter" parent="." index="4" unique_id=418855300]
+position = Vector2(1, -11)
+scale = Vector2(-1, 1)
+collision_mask = 96
+
+[node name="CollisionShape2D" parent="DamageEmitter" index="0" unique_id=155080340]
+position = Vector2(7, -1)
+shape = SubResource("RectangleShape2D_5pi7f")
+
+[connection signal="area_entered" from="DamageEmitter" to="." method="OnDamageEmitterAreaEntered"]
+
+[editable path="DamageEmitter"]

@@ -16,11 +16,13 @@ public partial class Character : CharacterBody2D
   
   private AnimationPlayer _animationPlayer;
   private Sprite2D _characterSprite;
+  private Area2D _damageEmitter;
   
   public override void _Ready()
   {
     _animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
     _characterSprite = GetNode<Sprite2D>("CharacterSprite");
+    _damageEmitter = GetNode<Area2D>("DamageEmitter");
   }
   
   public override void _Process(double delta)
@@ -77,11 +79,19 @@ public partial class Character : CharacterBody2D
   //verifica a direção do Character para ele redirecionar o sprite
   public void FlipSprites()
   {
+    Vector2 scaleCollision = _damageEmitter.Scale;
     if (Velocity.X > 0)
+    {
       _characterSprite.FlipH = false;
-    
-    else if(Velocity.X < 0)
+      scaleCollision.X = 1;
+      
+    }
+    else if (Velocity.X < 0)
+    {
       _characterSprite.FlipH = true;
+      scaleCollision.X = -1;
+    }
+    _damageEmitter.Scale = scaleCollision;
   }
 
   private bool _canMove() => _state == EnumState.WALK || _state == EnumState.IDLE;
@@ -91,5 +101,10 @@ public partial class Character : CharacterBody2D
 
   //função que faz que o jogador após terminar o soco ele volte no modo IDLE
   public void OnCompletedAction() => _state = EnumState.IDLE;
-  
+
+  public void OnDamageEmitterAreaEntered(DamageReceiver damageEmitter)
+  {
+    damageEmitter.EmitSignal(DamageReceiver.SignalName.DamageRecivedEmmiter, Damage);
+    GD.Print(damageEmitter);
+  }
 }
