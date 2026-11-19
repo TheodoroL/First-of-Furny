@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://bo0da5bjqegbk"]
+
+[ext_resource type="Texture2D" uid="uid://0hfc1b30iteg" path="res://src/assets/art/backgrounds/street-background.png" id="1_th6ti"]
+
+[node name="Stage" type="Node2D" unique_id=1666625345]
+
+[node name="Backgrounds" type="Node2D" parent="." unique_id=1383262533]
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgrounds" unique_id=923653952]
+texture = ExtResource("1_th6ti")
+centered = false
