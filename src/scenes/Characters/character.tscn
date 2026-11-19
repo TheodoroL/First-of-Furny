@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://bci521tqewego" path="res://src/scripts/Character.cs" id="1_sfsgv"]
 
 [node name="Character" type="CharacterBody2D" unique_id=2090944644]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_sfsgv")
 Speed = 5.0
 

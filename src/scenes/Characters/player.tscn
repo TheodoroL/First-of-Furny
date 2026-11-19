@@ -7,7 +7,65 @@
 radius = 1.9999999
 height = 12.0
 
+[sub_resource type="Animation" id="Animation_y7cno"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_wryrm"]
+resource_name = "idle"
+length = 0.39999999999999997
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_wme8x"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../CharacterSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [10, 11, 12, 13, 14, 15, 16, 17]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y7cno"]
+_data = {
+&"RESET": SubResource("Animation_y7cno"),
+&"idle": SubResource("Animation_wryrm"),
+&"walk": SubResource("Animation_wme8x")
+}
+
 [node name="Player" unique_id=2090944644 instance=ExtResource("1_ai21x")]
+collision_layer = 2
+collision_mask = 9
 Health = 30
 Damage = 4
 Speed = 35.0
@@ -22,3 +80,7 @@ vframes = 10
 [node name="CollisionShape2D" parent="." index="2" unique_id=1469663763]
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_wryrm")
+
+[node name="AnimationPlayer" parent="." index="3" unique_id=1983981673]
+libraries/ = SubResource("AnimationLibrary_y7cno")
+autoplay = &"idle"
