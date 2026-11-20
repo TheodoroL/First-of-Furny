@@ -145,12 +145,11 @@ libraries/ = SubResource("AnimationLibrary_y7cno")
 autoplay = &"idle"
 
 [node name="DamageEmitter" parent="." index="4" unique_id=418855300]
-position = Vector2(1, -11)
-scale = Vector2(-1, 1)
+position = Vector2(0, -11)
 collision_mask = 96
 
 [node name="CollisionShape2D" parent="DamageEmitter" index="0" unique_id=155080340]
-position = Vector2(7, -1)
+position = Vector2(6, -1)
 shape = SubResource("RectangleShape2D_5pi7f")
 
 [connection signal="area_entered" from="DamageEmitter" to="." method="OnDamageEmitterAreaEntered"]

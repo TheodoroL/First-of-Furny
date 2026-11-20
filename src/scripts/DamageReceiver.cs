@@ -4,5 +4,5 @@ using System;
 public partial class DamageReceiver : Area2D
 {
 	[Signal]
-	public delegate void DamageRecivedEmmiterEventHandler(int damage);
+	public delegate void DamageRecivedEmmiterEventHandler(int damage, Vector2 direction);
 }

@@ -4,5 +4,6 @@ public enum EnumState
 {
     IDLE,
     WALK,
-    ATTACK
+    ATTACK,
+    DESTROY,
 }

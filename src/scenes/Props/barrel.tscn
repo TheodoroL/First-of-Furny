@@ -16,6 +16,7 @@ size = Vector2(10, 10)
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_qbalh")
+KnockbacIntenalty = 50.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2084710095]
 texture = ExtResource("1_wwnfy")
